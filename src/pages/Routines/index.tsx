@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "../../common/Container";
+import { Container } from "../../common/";
 import { Logo, NavBar, NavLink } from "../../components";
 interface OwnProps {}
 const navLinks = [

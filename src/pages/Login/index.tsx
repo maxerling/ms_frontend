@@ -1,7 +1,6 @@
 import React from "react";
-import { Container } from "../../common/Container";
+import { Container, Input } from "../../common/";
 import { Logo, NavBar } from "../../components";
-import * as S from "./styled";
 interface OwnProps {}
 
 export const Login: React.FC<OwnProps> = ({}) => {
@@ -11,8 +10,8 @@ export const Login: React.FC<OwnProps> = ({}) => {
         <Logo to="/login" />
       </NavBar>
       <Container>
-        <S.Input />
-        <S.Input />
+        <Input />
+        <Input />
       </Container>
     </>
   );
