@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Container } from "../../common/Container/styled";
 
-export const MainContainer = styled.div`
+export const MainContainer = styled(Container)`
   min-height: 100vh;
-  display: flex;
+  background: color;
 `;
