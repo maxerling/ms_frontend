@@ -1,19 +1,26 @@
-import React from "react";
 import { Container } from "../../common/";
 import { Logo, NavBar, NavLink } from "../../components";
+import { IAuthContext, useAuth } from "../../contexts/AuthContext";
 
 interface OwnProps {}
-const navLinks = [
-  {
-    name: "Routines",
-    to: "/routines",
-  },
-  {
-    name: "Sign out",
-    to: "/login",
-  },
-];
-export const Home: React.FC<OwnProps> = ({}) => {
+
+export const Home: React.FC<OwnProps> = () => {
+  const { logOut } = useAuth() as IAuthContext;
+  const navLinks = [
+    {
+      id: "0",
+      name: "Routines",
+      to: "/routines",
+      type: "link",
+    },
+    {
+      id: "1",
+      name: "Sign out",
+      to: "/login",
+      onClick: logOut,
+      type: "button",
+    },
+  ];
   return (
     <>
       <NavBar>

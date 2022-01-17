@@ -1,3 +1,3 @@
 import styled from "styled-components";
 
-export const Buttont = styled.button``;
+export const Button = styled.button``;
