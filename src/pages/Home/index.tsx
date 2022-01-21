@@ -4,7 +4,7 @@ import { IAuthContext, useAuth } from "../../contexts/AuthContext";
 
 interface OwnProps {}
 
-export const Home: React.FC<OwnProps> = () => {
+export const HomeP: React.FC<OwnProps> = () => {
   const { logOut } = useAuth() as IAuthContext;
   const navLinks = [
     {

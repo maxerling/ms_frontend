@@ -8,7 +8,19 @@ import { useEffect } from "react";
 
 interface OwnProps {}
 
-export const Login: React.FC<OwnProps> = () => {
+interface Routine {
+  id: string;
+  routineName: string;
+  activities: Activity[];
+}
+
+interface Activity {
+  activityName: string;
+  description: string;
+  time_HHMM: string;
+}
+
+export const LoginP: React.FC<OwnProps> = () => {
   const [currentEmail, setCurrentEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [loading, setLoading] = useState(false);

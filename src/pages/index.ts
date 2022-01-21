@@ -1,5 +1,5 @@
-import { Home } from "./Home";
-import { Login } from "./Login";
-import { Routines } from "./Routines";
+import { HomeP } from "./Home";
+import { LoginP } from "./Login";
+import { RoutinesP } from "./Routines";
 
-export { Home, Login, Routines };
+export { HomeP as Home, LoginP as Login, RoutinesP as Routines };
