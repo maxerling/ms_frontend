@@ -46,8 +46,22 @@ export const RoutinesP: React.FC<OwnProps> = () => {
 
   useEffect(() => {
     setLoading(true);
-
-    currentUser && getRoutines(currentUser, setRoutines);
+    (async function () {
+      const accessToken = await (currentUser as User).getIdToken();
+      const options = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const result = await axios.get(
+        "https://europe-west1-morningstar-dev-b4179.cloudfunctions.net/api/routines",
+        options
+      );
+      setRoutines(result.data);
+    })();
 
     setLoading(false);
   }, []);
@@ -152,22 +166,3 @@ async function handleSelectButton(
   );
   navigate("/", { replace: true });
 }
-const getRoutines = async (
-  currentUser: User,
-  setRoutines: React.Dispatch<React.SetStateAction<never[]>>
-) => {
-  const accessToken = await currentUser?.getIdToken();
-  const options = {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  };
-  const result = await axios.get(
-    "https://europe-west1-morningstar-dev-b4179.cloudfunctions.net/api/routines",
-    options
-  );
-  setRoutines(result.data);
-};
