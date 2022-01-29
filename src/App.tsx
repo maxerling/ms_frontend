@@ -1,5 +1,5 @@
-import { Theme } from "./global/theme";
-import GlobalStyles from "./global/globalStyles";
+//import { Theme } from "./global/theme";
+//import GlobalStyles from "./global/globalStyles";
 import { MainContainer } from "./components/MainContainer";
 import {
   BrowserRouter as Router,
@@ -10,11 +10,13 @@ import {
 import { Home, Login, Routines } from "./pages";
 import { AuthProvider } from "./contexts/AuthContext";
 import { PrivateRoute } from "./components";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
-    <Theme>
-      <GlobalStyles />
+    //<Theme>
+    <ChakraProvider>
+      {/* <GlobalStyles /> */}
       <AuthProvider>
         <MainContainer>
           <Router>
@@ -41,7 +43,8 @@ function App() {
           </Router>
         </MainContainer>
       </AuthProvider>
-    </Theme>
+    </ChakraProvider>
+    // </Theme>
   );
 }
 

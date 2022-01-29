@@ -8,7 +8,6 @@ export const NavLink = styled(Container)`
     color: black;
     font-weight: 700;
     text-decoration: none;
-    font-size: ${({ theme }) => theme.font.size.xs};
   }
   width: 8%;
 `;

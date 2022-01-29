@@ -6,6 +6,7 @@ import { User } from "firebase/auth";
 import axios from "axios";
 import * as S from "./styled";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { Spacer } from "@chakra-ui/react";
 
 interface OwnProps {}
 export interface Routine {
@@ -30,17 +31,18 @@ export const RoutinesP: React.FC<OwnProps> = () => {
   const navigate = useNavigate();
   const navLinks = [
     {
-      id: "0",
-      name: "Routines",
-      to: "/routines",
-      type: "link",
-    },
-    {
       id: "1",
       name: "Sign out",
       to: "/login",
       onClick: logOut,
-      type: "button",
+      type: "actionLink",
+    },
+    {
+      id: "0",
+      name: "Routines",
+      to: "/routines",
+      type: "buttonLink",
+      typeOfButton: "solid",
     },
   ];
 
@@ -72,6 +74,7 @@ export const RoutinesP: React.FC<OwnProps> = () => {
         <>
           <NavBar>
             <Logo to="/" />
+            <Spacer />
             <NavLink navLinks={navLinks} />
           </NavBar>
           <Container>

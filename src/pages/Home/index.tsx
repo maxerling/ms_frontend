@@ -5,7 +5,7 @@ import { Container } from "../../common/";
 import { Logo, NavBar, NavLink } from "../../components";
 import { IAuthContext, useAuth } from "../../contexts/AuthContext";
 import { Routine } from "../Routines";
-
+import { Spacer, Flex, Box, Button, Heading } from "@chakra-ui/react";
 interface OwnProps {}
 
 export const HomeP: React.FC<OwnProps> = () => {
@@ -13,17 +13,18 @@ export const HomeP: React.FC<OwnProps> = () => {
   const [currentRoutine, setCurrentRoutine] = useState<Routine>();
   const navLinks = [
     {
-      id: "0",
-      name: "Routines",
-      to: "/routines",
-      type: "link",
-    },
-    {
       id: "1",
       name: "Sign out",
       to: "/login",
       onClick: logOut,
-      type: "button",
+      type: "actionLink",
+    },
+    {
+      id: "0",
+      name: "Routines",
+      to: "/routines",
+      type: "buttonLink",
+      typeOfButton: "solid",
     },
   ];
 
@@ -57,8 +58,10 @@ export const HomeP: React.FC<OwnProps> = () => {
     <>
       <NavBar>
         <Logo to="/" />
+        <Spacer />
         <NavLink navLinks={navLinks} />
       </NavBar>
+
       <Container>
         <>
           {currentRoutine !== undefined ? (
