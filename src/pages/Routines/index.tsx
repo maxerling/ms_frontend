@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
-import { Button, Container } from "../../common/";
+
 import { Logo, NavBar, NavLink, Routines } from "../../components";
 import { IAuthContext, useAuth } from "../../contexts/AuthContext";
 import { User } from "firebase/auth";
 import axios from "axios";
 import * as S from "./styled";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { Spacer } from "@chakra-ui/react";
+import {
+  Heading,
+  Spacer,
+  Button,
+  Box,
+  Container,
+  VStack,
+  Text,
+} from "@chakra-ui/react";
 
 interface OwnProps {}
 export interface Routine {
@@ -78,40 +86,50 @@ export const RoutinesP: React.FC<OwnProps> = () => {
             <NavLink navLinks={navLinks} />
           </NavBar>
           <Container>
-            <h1>ROUTINES</h1>
-            {routines.map((routine: Routine) => {
-              return (
-                <S.Routine
-                  style={
-                    routine.isSelected
-                      ? { background: "yellow" }
-                      : { background: "blue" }
-                  }
-                  onClick={(e) => {
-                    handleSelectElement(e, routine.id, setInactive);
-                  }}
-                  key={routine.id}
-                >
-                  {routine.routineName}
-                </S.Routine>
-              );
-            })}
-            <Button
-              loading={inactive}
-              onClick={() => {
-                if (currentUser === null) {
-                  return;
-                }
-                handleSelectButton(
-                  currentRoutine,
-                  setInactive,
-                  currentUser,
-                  navigate
+            <VStack p={2}>
+              <Heading>ROUTINES</Heading>
+            </VStack>
+            <Container p={2} borderRadius="lg" bg="gray.100" minH={400}>
+              {routines.map((routine: Routine) => {
+                return (
+                  <Box
+                    m={1}
+                    borderRadius="lg"
+                    style={{
+                      cursor: "pointer",
+                      background: "white",
+                      border: routine.isSelected ? "2px solid green" : "",
+                    }}
+                    onClick={(e) => {
+                      handleSelectElement(e, routine.id, setInactive);
+                    }}
+                    key={routine.id}
+                  >
+                    <Text fontWeight="bold" fontSize="lg" p={3}>
+                      {routine.routineName}
+                    </Text>
+                  </Box>
                 );
-              }}
-            >
-              Select
-            </Button>
+              })}
+            </Container>
+            <VStack p={2}>
+              <Button
+                isDisabled={inactive}
+                onClick={() => {
+                  if (currentUser === null) {
+                    return;
+                  }
+                  handleSelectButton(
+                    currentRoutine,
+                    setInactive,
+                    currentUser,
+                    navigate
+                  );
+                }}
+              >
+                Select
+              </Button>
+            </VStack>
           </Container>
         </>
       )}

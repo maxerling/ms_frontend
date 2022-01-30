@@ -99,9 +99,9 @@ export const LoginP: React.FC<OwnProps> = () => {
             Login
           </Button>
         </Box>
-        <Box p={3}>
+        <Box p={1}>
           <Button
-            width="180px"
+            width="200px"
             isLoading={loading}
             colorScheme={"blue"}
             loading={loading}
