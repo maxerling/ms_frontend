@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { Container, Input, Button } from "../../common/";
+
 import { Logo, NavBar } from "../../components";
 import * as S from "./styled";
 import { useAuth, IAuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
+import {
+  Input,
+  Button,
+  Box,
+  VStack,
+  Heading,
+  Container,
+} from "@chakra-ui/react";
 interface OwnProps {}
 
 interface Routine {
@@ -55,22 +62,35 @@ export const LoginP: React.FC<OwnProps> = () => {
       <NavBar>
         <Logo to="/login" />
       </NavBar>
-      <S.GContainer>
-        <Container>
-          E-mail
+      <Container centerContent>
+        <Box w="300px" p={2}>
+          <Heading as="h4" size="sm">
+            E-mail
+          </Heading>
           <Input
             onChange={(e) => {
               setCurrentEmail(e.target.value);
             }}
           />
-          Password
+        </Box>
+        <Box w="300px" p={2}>
+          <Heading as="h4" size="sm">
+            Password
+          </Heading>
           <Input
+            type={"password"}
             onChange={(e) => {
               setCurrentPassword(e.target.value);
             }}
           />
+        </Box>
+
+        <Box p={2}>
           <Button
-            loading={loading}
+            width="200px"
+            border="10px"
+            isLoading={loading}
+            colorScheme={"blue"}
             onClick={async () => {
               await signInHandler();
               navigate("/", { replace: true });
@@ -78,7 +98,12 @@ export const LoginP: React.FC<OwnProps> = () => {
           >
             Login
           </Button>
+        </Box>
+        <Box p={3}>
           <Button
+            width="180px"
+            isLoading={loading}
+            colorScheme={"blue"}
             loading={loading}
             onClick={async () => {
               await signUpHandler();
@@ -87,8 +112,8 @@ export const LoginP: React.FC<OwnProps> = () => {
           >
             Register
           </Button>
-        </Container>
-      </S.GContainer>
+        </Box>
+      </Container>
     </>
   );
 };
