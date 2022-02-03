@@ -1,5 +1,5 @@
-import axios from "axios";
-import { User } from "firebase/auth";
+import axios, { AxiosResponse } from "axios";
+import { User, UserCredential } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Logo, NavBar, NavLink } from "../../components";
 import { IAuthContext, useAuth } from "../../contexts/AuthContext";
@@ -12,11 +12,8 @@ import {
   Container,
   Text,
   VStack,
-  Badge,
-  HStack,
   Tag,
 } from "@chakra-ui/react";
-import { error } from "@chakra-ui/utils";
 
 interface OwnProps {}
 
@@ -63,12 +60,12 @@ export const HomeP: React.FC<OwnProps> = () => {
           Authorization: `Bearer ${idToken}`,
         },
       };
-      const user = await axios.get(
+      const resp = await axios.get(
         `https://europe-west1-morningstar-dev-b4179.cloudfunctions.net/api/users/${uid}`,
         options
       );
 
-      const userCurrentRoutine = user.data.routineId;
+      const userCurrentRoutine = resp.data.routineId;
       if (!userCurrentRoutine) {
         setLoading(false);
         return;
@@ -82,16 +79,7 @@ export const HomeP: React.FC<OwnProps> = () => {
         setCurrentRoutine(routine.data as Routine);
         setState(true);
       } catch {
-        await axios.put(
-          `https://europe-west1-morningstar-dev-b4179.cloudfunctions.net/api/users/${user.data.id}`,
-          {
-            ...user,
-            routineId: "",
-          },
-          options
-        );
-        alert("Something went wrong, try to login again!");
-        await logOut();
+        routineError(resp, logOut, options);
       }
 
       setLoading(false);
@@ -297,4 +285,21 @@ function updateTotalActivityCount(currentActivityStatus: boolean) {
   currentActivityStatus == true
     ? incrementTotalActivityCount(currentTotalCount)
     : decrementTotalActivityCount(currentTotalCount);
+}
+
+async function routineError(
+  resp: AxiosResponse,
+  logOut: () => Promise<void>,
+  options: object
+) {
+  await axios.put(
+    `https://europe-west1-morningstar-dev-b4179.cloudfunctions.net/api/users/${resp.data.id}`,
+    {
+      ...resp,
+      routineId: "",
+    },
+    options
+  );
+  alert("Something went wrong, try to login again!");
+  await logOut();
 }
