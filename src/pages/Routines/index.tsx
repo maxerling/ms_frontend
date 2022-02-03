@@ -24,10 +24,12 @@ export interface Routine {
   isSelected: boolean;
 }
 
-interface Activity {
+export interface Activity {
+  id: string;
   activityName: string;
   description: string;
   time_HHMM: string;
+  isSelected: boolean;
 }
 
 export const RoutinesP: React.FC<OwnProps> = () => {
@@ -89,7 +91,7 @@ export const RoutinesP: React.FC<OwnProps> = () => {
             <VStack p={2}>
               <Heading>ROUTINES</Heading>
             </VStack>
-            <Container p={2} borderRadius="lg" bg="gray.100" minH={400}>
+            <Container p={2} borderRadius="lg" bg="gray.200" minH={400}>
               {routines.map((routine: Routine) => {
                 return (
                   <Box
@@ -98,10 +100,15 @@ export const RoutinesP: React.FC<OwnProps> = () => {
                     style={{
                       cursor: "pointer",
                       background: "white",
-                      border: routine.isSelected ? "2px solid green" : "",
+                      border: routine.isSelected ? "2px solid gray" : "",
                     }}
                     onClick={(e) => {
-                      handleSelectElement(e, routine.id, setInactive);
+                      handleSelectElementRadio(
+                        routine.id,
+                        routines,
+                        setInactive,
+                        setCurrentRoutine
+                      );
                     }}
                     key={routine.id}
                   >
@@ -114,6 +121,7 @@ export const RoutinesP: React.FC<OwnProps> = () => {
             </Container>
             <VStack p={2}>
               <Button
+                colorScheme={"yellow"}
                 isDisabled={inactive}
                 onClick={() => {
                   if (currentUser === null) {
@@ -136,20 +144,21 @@ export const RoutinesP: React.FC<OwnProps> = () => {
     </>
   );
 
-  function handleSelectElement(
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    routineId: string,
-    setInactive: any
+  function handleSelectElementRadio(
+    thisElementId: string,
+    routines: Routine[],
+    setInactive?: React.Dispatch<React.SetStateAction<boolean>>,
+    setCurrentRoutine?: React.Dispatch<React.SetStateAction<string>>
   ) {
-    routines.forEach((r: Routine) => {
-      const alreadySelected = r.id === routineId && r.isSelected === true;
+    routines.forEach((r: Routine | Activity) => {
+      const alreadySelected = r.id === thisElementId && r.isSelected === true;
       if (alreadySelected) {
         r.isSelected = false;
-        setCurrentRoutine("");
-      } else if (r.id === routineId) {
+        setCurrentRoutine && setCurrentRoutine("");
+      } else if (r.id === thisElementId) {
         r.isSelected = true;
-        setCurrentRoutine(routineId);
-        setInactive(false);
+        setCurrentRoutine && setCurrentRoutine(thisElementId);
+        setInactive && setInactive(false);
       } else {
         r.isSelected = false;
       }
@@ -185,5 +194,6 @@ async function handleSelectButton(
     },
     options
   );
+  localStorage.clear();
   navigate("/", { replace: true });
 }

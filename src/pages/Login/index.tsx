@@ -9,23 +9,10 @@ import {
   Input,
   Button,
   Box,
-  VStack,
   Heading,
   Container,
 } from "@chakra-ui/react";
 interface OwnProps {}
-
-interface Routine {
-  id: string;
-  routineName: string;
-  activities: Activity[];
-}
-
-interface Activity {
-  activityName: string;
-  description: string;
-  time_HHMM: string;
-}
 
 export const LoginP: React.FC<OwnProps> = () => {
   const [currentEmail, setCurrentEmail] = useState("");
@@ -90,7 +77,7 @@ export const LoginP: React.FC<OwnProps> = () => {
             width="200px"
             border="10px"
             isLoading={loading}
-            colorScheme={"blue"}
+            colorScheme={"yellow"}
             onClick={async () => {
               await signInHandler();
               navigate("/", { replace: true });
@@ -103,7 +90,7 @@ export const LoginP: React.FC<OwnProps> = () => {
           <Button
             width="200px"
             isLoading={loading}
-            colorScheme={"blue"}
+            colorScheme={"yellow"}
             loading={loading}
             onClick={async () => {
               await signUpHandler();

@@ -10,7 +10,7 @@ export const Logo: React.FC<OwnProps> = ({ to }) => {
   return (
     <Box pl={4} pt={2}>
       <Heading size="md">
-        <Link to={to}>Morning Star</Link>
+        <Link to={to}>Morning Star⭐</Link>
       </Heading>
     </Box>
   );

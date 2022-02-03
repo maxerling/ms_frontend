@@ -24,11 +24,10 @@ export const NavLink: React.FC<OwnProps> = ({ navLinks }) => {
 function getNavBarLink(navLink: INavLink, linkColor: string) {
   if (navLink.type === "button") {
     return (
-      <Box pr={4}>
+      <Box pr={4} key={navLink.id}>
         <Button
           variant={navLink.typeOfButton}
-          colorScheme="blue"
-          key={navLink.id}
+          colorScheme="yellow"
           onClick={() => {
             if (navLink.onClick !== undefined) {
               navLink.onClick();
@@ -41,7 +40,7 @@ function getNavBarLink(navLink: INavLink, linkColor: string) {
     );
   } else if (navLink.type === "link") {
     return (
-      <Box pr={4} pt={2}>
+      <Box pr={4} pt={2} key={navLink.id}>
         <Link
           color={linkColor}
           _hover={{
@@ -50,7 +49,6 @@ function getNavBarLink(navLink: INavLink, linkColor: string) {
           fontSize={"sm"}
           fontWeight={400}
           as={RouterLink}
-          key={navLink.id}
           to={navLink.to}
         >
           {navLink.name}
@@ -59,7 +57,7 @@ function getNavBarLink(navLink: INavLink, linkColor: string) {
     );
   } else if (navLink.type === "actionLink") {
     return (
-      <Box pr={4} pt={2}>
+      <Box pr={4} pt={2} key={navLink.id}>
         <Link
           color={linkColor}
           _hover={{
@@ -78,20 +76,15 @@ function getNavBarLink(navLink: INavLink, linkColor: string) {
     );
   } else if (navLink.type === "buttonLink") {
     return (
-      <Box pr={4}>
+      <Box pr={4} key={navLink.id}>
         <Link
-          key={navLink.id}
           as={RouterLink}
           to={navLink.to}
           _hover={{
             textDecoration: "none",
           }}
         >
-          <Button
-            variant={navLink.typeOfButton}
-            colorScheme="blue"
-            key={navLink.id}
-          >
+          <Button variant={navLink.typeOfButton} colorScheme="yellow">
             {navLink.name}
           </Button>
         </Link>
