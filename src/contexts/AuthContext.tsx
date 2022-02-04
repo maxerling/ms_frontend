@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   UserCredential,
+  AuthError,
 } from "firebase/auth";
 import axios from "axios";
 interface OwnProps {}
@@ -21,37 +22,33 @@ export interface IAuthContext {
   signUp: (email: string, password: string) => Promise<void>;
 }
 
+
+
 export const AuthProvider: React.FC<OwnProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<any>({});
   const [loading, setLoading] = useState(true);
   async function signUp(email: string, password: string) {
-    try {
-      const userCred = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const idToken = await userCred.user.getIdToken();
+    const userCred = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const idToken = await userCred.user.getIdToken();
 
-      const options = {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${idToken}`,
-        },
-      };
+    const options = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${idToken}`,
+      },
+    };
 
-      await axios.post(
-        "https://europe-west1-morningstar-dev-b4179.cloudfunctions.net/api/users",
-        {},
-        options
-      );
-    } catch (err) {
-      err instanceof Error
-        ? console.log(err.message)
-        : console.log("regristration error occur");
-    }
+    await axios.post(
+      "https://europe-west1-morningstar-dev-b4179.cloudfunctions.net/api/users",
+      {},
+      options
+    );
   }
 
   function signIn(email: string, password: string) {
