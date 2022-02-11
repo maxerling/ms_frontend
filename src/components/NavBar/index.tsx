@@ -1,5 +1,4 @@
 import React from "react";
-import * as S from "./styled";
 import { Flex, Box, useColorModeValue } from "@chakra-ui/react";
 interface OwnProps {}
 

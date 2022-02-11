@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { Logo, NavBar } from "../../components";
-import * as S from "./styled";
 import { useAuth, IAuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -10,13 +9,10 @@ import {
   Button,
   Box,
   Heading,
-  Container,
   AlertIcon,
-  AlertTitle,
   Alert,
   AlertDescription,
-  CloseButton,
-  Center,
+
   Flex,
   VStack,
 } from "@chakra-ui/react";
@@ -33,6 +29,8 @@ const firebaseErrors: firebaseErrors = {
     "Invalid password, password needs to be atleast 6 characters",
   "auth/invalid-email": "Invalid email, try again",
   "auth/internal-error": "Unexpected error, try again",
+  "auth/wrong-password": "Incorrect password",
+  "auth/too-many-requests": "Too many requests, wait for 1 min",
 };
 export const LoginP: React.FC<OwnProps> = () => {
   const [currentEmail, setCurrentEmail] = useState("");

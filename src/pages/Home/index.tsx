@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { User, UserCredential } from "firebase/auth";
+import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Logo, NavBar, NavLink } from "../../components";
 import { IAuthContext, useAuth } from "../../contexts/AuthContext";

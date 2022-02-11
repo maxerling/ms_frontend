@@ -1,5 +1,4 @@
 import React from "react";
-import * as S from "./styled";
 import { Link } from "react-router-dom";
 import { Box, Heading } from "@chakra-ui/react";
 interface OwnProps {

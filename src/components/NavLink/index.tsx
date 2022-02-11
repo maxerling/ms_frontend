@@ -1,7 +1,5 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-//import { Button } from "../../common";
-import * as S from "./styled";
 import { Box, Button, Flex, Link, useColorModeValue } from "@chakra-ui/react";
 interface INavLink {
   id: string;

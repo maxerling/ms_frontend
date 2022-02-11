@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { Logo, NavBar, NavLink, Routines } from "../../components";
+import { Logo, NavBar, NavLink } from "../../components";
 import { IAuthContext, useAuth } from "../../contexts/AuthContext";
 import { User } from "firebase/auth";
 import axios from "axios";
-import * as S from "./styled";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import {
   Heading,
