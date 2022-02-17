@@ -2,6 +2,7 @@
   "name": "morningstar_frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://maxerling.github.io/ms_frontend",
   "dependencies": {
     "@chakra-ui/react": "^1.8.1",
     "@emotion/react": "^11.7.1",
@@ -25,6 +26,8 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -51,6 +54,7 @@
   "devDependencies": {
     "@types/dotenv-webpack": "^7.0.3",
     "@types/styled-components": "^5.1.19",
-    "dotenv-webpack": "^7.0.3"
+    "dotenv-webpack": "^7.0.3",
+    "gh-pages": "^3.2.3"
   }
 }

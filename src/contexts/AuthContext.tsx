@@ -6,7 +6,6 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   UserCredential,
-  AuthError,
 } from "firebase/auth";
 import axios from "axios";
 interface OwnProps {}
@@ -21,8 +20,6 @@ export interface IAuthContext {
   signIn: (email: string, password: string) => Promise<UserCredential>;
   signUp: (email: string, password: string) => Promise<void>;
 }
-
-
 
 export const AuthProvider: React.FC<OwnProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<any>({});
