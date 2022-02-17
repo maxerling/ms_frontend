@@ -87,10 +87,23 @@ export const HomeP: React.FC<OwnProps> = () => {
   }, []);
 
   useEffect(() => {
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    //reset hotstreak
+    if (
+      date !== today.toDateString() &&
+      date !== yesterday.toDateString() &&
+      date !== null
+    ) {
+      console.log("egg");
+      clearTotalActiviityCountAndHotStreakAndDate();
+      setHotStreak(0);
+    }
     if (
       currentRoutine &&
       totalCount != null &&
-      date === new Date().toDateString()
+      (date === new Date().toDateString() || date === null)
     ) {
       for (let i = 0; i < totalCount; i++) {
         currentRoutine.activities[i].isSelected = true;
@@ -101,7 +114,8 @@ export const HomeP: React.FC<OwnProps> = () => {
       });
     }
 
-    if (date !== new Date().toDateString()) {
+    //new day activity reset
+    if (date !== today.toDateString() && date !== null) {
       localStorage.setItem("totalCount", "0");
     }
   }, [state]);
