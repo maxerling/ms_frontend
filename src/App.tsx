@@ -6,6 +6,7 @@ import {
   Routes,
   Route,
   Navigate,
+  HashRouter,
 } from "react-router-dom";
 import { Home, Login, Routines } from "./pages";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -14,12 +15,10 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
-    //<Theme>
     <ChakraProvider>
-      {/* <GlobalStyles /> */}
       <AuthProvider>
         <MainContainer>
-          <Router>
+          <HashRouter>
             <Routes>
               <Route
                 path="/"
@@ -40,11 +39,10 @@ function App() {
               />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
-          </Router>
+          </HashRouter>
         </MainContainer>
       </AuthProvider>
     </ChakraProvider>
-    // </Theme>
   );
 }
 
