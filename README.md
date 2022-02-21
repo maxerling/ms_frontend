@@ -8,10 +8,13 @@ Morning Star is a morning routine webapplication that offers users the opportuni
 
 
 ## Default Login
+> 
 > Username:
 > user@user.com
+> 
 > Password:
 > useruser
+> 
 ## Built With
 * React.js
 * Node.js
