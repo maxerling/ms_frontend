@@ -6,7 +6,7 @@
 # About Project
 Morning Star is a morning routine webapplication that offers users the opportunity to pick a morning routine and do it daily basis. User will get a hot streak based on consistency.
 
-
+Website: https://maxerling.github.io/ms_frontend
 ## Default Login
 > 
 > Username:
